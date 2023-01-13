@@ -1,0 +1,11 @@
+# general
+.DS_Store
+
+# dependencies
+node_modules/
+
+# environment
+.env
+
+# dist
+/dist
