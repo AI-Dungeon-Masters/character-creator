@@ -18,6 +18,8 @@ app.use(urlencoded({ extended: true }));
 // landing page route for signing in for existing users
 app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html')));
 
+app.get('/client/login/oauth.js', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'oauth.js')));
+
 // route for post for login in (when user click login button with login info)
 app.post('/login',
   userController.verifyUser,

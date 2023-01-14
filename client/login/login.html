@@ -2,6 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Unit-10-Authentication</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
   Login
@@ -10,6 +11,10 @@
     <input name="password" type="password" placeholder="password"></input>
     <input type='submit' value="login">
   </form>
+  <div id="oauth" style="size:10;">
+  </div>
+  <script src="/client/login/oauth.js">
+  </script>
   <a href='./signup'>Sign up</a>
 </body>
 </html>
