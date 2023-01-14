@@ -2,10 +2,12 @@ require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const userController = require('./controllers/userController');
 const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
+const databaseController = require('./controllers/databaseController');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +16,7 @@ const { json, urlencoded } = require('express');
 
 app.use(json());
 app.use(urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // landing page route for signing in for existing users
 app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html')));
@@ -38,6 +41,7 @@ app.get('/signup',
 // route for post for sign up (when user sign up with sign up info)
 app.post('/signup', 
   userController.createUser,
+  databaseController.addUser,
   sessionController.startSession,
   cookieController.setSSIDCookie,
   (req, res) => {
