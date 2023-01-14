@@ -2,12 +2,19 @@ const userController = {};
 
 userController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
-  
-  if ( !username || !password ) throw 'Empty username or password field';
-  res.locals.username = username;
-  res.locals.password = password;
+  try {
+    if ( !username || !password ) throw 'Empty username or password field';
+    res.locals.username = username;
+    res.locals.password = password;
 
-  return next();
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Express error handler caught userController.verifyUser error',
+      message: { err: err },
+      redirect: '/'
+    })
+  }
 };
 
 userController.createUser = async (req, res, next) => {
@@ -23,12 +30,11 @@ userController.createUser = async (req, res, next) => {
   }
   catch (err) {
     return next({
-      err: `An error has occurred: ${err}`
-    });
+      log: 'Express error handler caught userController.createUser error',
+      message: { err: err },
+      redirect: '/signup'
+    })
   }
-
-
-  return next();
 }
 
 module.exports = userController;
