@@ -12,3 +12,7 @@ window.onload = () => {
     google.accounts.id.prompt(); // Display the One Tap dialog
 
 }
+const gitAuth = () => {
+    // fetch
+    console.log('gitAuth');
+};
