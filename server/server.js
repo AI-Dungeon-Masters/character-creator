@@ -26,6 +26,7 @@ app.get('/client/login/oauth.js', (req, res) => res.status(200).sendFile(path.jo
 // route for post for login in (when user click login button with login info)
 app.post('/login',
   userController.verifyUser,
+  databaseController.getUser,
   sessionController.startSession,
   cookieController.setSSIDCookie,
   (req, res) => {
@@ -81,6 +82,7 @@ app.use((err, req, res, next) => {
   };
   const errorObj = Object.assign({}, defaultErr, {message: {err: err}});
   console.log(`${errorObj.log}`);
+  if(err.redirect) res.redirect('/');
   
   return res.status(errorObj.status).json(errorObj.message);
 });
