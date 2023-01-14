@@ -42,6 +42,14 @@ app.post('/signup',
     res.redirect('/app');
 });
 
+// route for logout (not sure, might not be get)
+app.get('/logout', 
+  sessionController.endSession,
+  cookieController.deleteSSIDCookie,
+  (req, res) => {
+    res.redirect('/');
+});
+
 // if user is logged in/signed up (which means they will have a valid session), they will be served the index.html
 // which is entry point for app
 app.get('/app',
