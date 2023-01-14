@@ -21,6 +21,23 @@ module.exports = {
     compress: true,
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
+    devMiddleware: {
+      index: false,
+    },
+    proxy: {
+      '/login': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/signup': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+    }
   },
   module: {
     rules: [
