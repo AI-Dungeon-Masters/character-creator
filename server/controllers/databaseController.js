@@ -7,12 +7,6 @@ const databaseController = {};
 
 databaseController.addUser = async (req, res, next) => {
   let { username, password } = res.locals;
-  const params = [username, password];
-
-  bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
-    if (err) return next(err);
-    password = hash;
-});
 
   const query = `
   INSERT INTO users (username, password)
@@ -20,9 +14,11 @@ databaseController.addUser = async (req, res, next) => {
   RETURNING player_id;`;
 
   try {
+    const hash = await bcrypt.hash(password, SALT_WORK_FACTOR);
+    const params = [username, hash];
     const newUser = await sqlDB.query(query, params);
+
     res.locals.newUser = newUser;
-    console.log(newUser);
     res.locals.id = newUser.rows[0].player_id;
 
     return next();
