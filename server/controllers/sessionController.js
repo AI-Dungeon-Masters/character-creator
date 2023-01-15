@@ -1,8 +1,9 @@
 const sessionController = {};
 
 sessionController.startSession = async (req, res, next) => {
+  return next();
   // need session table in db
-  
+  /*
   const params = [res.locals.user.id]; // need to set this value somewhere else
 
   const query = `INSERT INTO sessions (cookieId) VALUE $1`;
@@ -17,11 +18,17 @@ sessionController.startSession = async (req, res, next) => {
       redirect: true
     })
   }
-
+*/
 }
 
+sessionController.endSession = async (req, res, next) => {
+  return next();
+}
+
+// Because of the way we structured our app, this method likely isn't necessary.
+/*
 sessionController.isLoggedIn = async (req, res, next) => {
-  const params = [req.cookies.ssid];
+    const params = [req.cookies.ssid];
   
     const query = `SELECT cookieId FROM sessions WHERE cookieId = $1`;
   
@@ -38,9 +45,6 @@ sessionController.isLoggedIn = async (req, res, next) => {
       })
     }
 }
-
-sessionController.endSession = async (req, res, next) => {
-    return next();
-  }
+*/
 
 module.exports = sessionController;
