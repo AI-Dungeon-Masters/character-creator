@@ -1,6 +1,8 @@
 const sessionController = {};
 
 sessionController.startSession = async (req, res, next) => {
+  // need session table in db
+  
   return next();
 }
 
