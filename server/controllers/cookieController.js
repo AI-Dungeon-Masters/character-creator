@@ -1,7 +1,13 @@
+require('dotenv').config();
+
 const cookieController = {};
 
 cookieController.setSSIDCookie = async (req, res, next) => {
-  //res.cookie('ssid', res.locals.id, { httpOnly: true });
+  const { publicKey, token } = res.locals;
+  
+  res.cookie('publicKey', publicKey, { httpOnly: true, maxAge: process.env.COOKIE_EXPIRE_TIME });
+  res.cookie('token', token, { httpOnly: true, maxAge: process.env.COOKIE_EXPIRE_TIME });
+  
   return next();
 }
 

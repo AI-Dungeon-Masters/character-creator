@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const mongoDB = require('mongoose');
 
+mongoDB.set('strictQuery', true);
 mongoDB.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -14,10 +15,11 @@ mongoDB.connect(process.env.MONGO_URI, {
 const Schema = mongoDB.Schema;
 
 const sessionSchema = new Schema({
-  cookieId: { type: String, required: true, unique: true },
+  publicKey: { type: String, required: true, unique: true },
+  privateKey: { type: String, required: true, unique: true  },
   createdAt: { type: Date, expires: process.env.SESSION_EXPIRE_TIME, default: Date.now }
 });
 
-const Session = mongoose.model('Session', sessionSchema);
+const Session = mongoDB.model('Session', sessionSchema);
 
 module.exports = { Session };

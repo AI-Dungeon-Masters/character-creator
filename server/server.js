@@ -21,7 +21,6 @@ app.use(cookieParser());
 // landing page route for signing in for existing users
 app.get('/login',
   (req, res) => {
-    console.log(req.query);
     res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html'));
 });
 
@@ -85,7 +84,7 @@ app.use((err, req, res, next) => {
     message: { err: 'An error occurred' }
   };
   const errorObj = Object.assign({}, defaultErr, {message: {err: err}});
-  console.log(`${errorObj.log}`);
+  console.log(`${errorObj}`);
   
   if(err.redirect) res.redirect(err.redirect + '?type=' + err.message.err);
   
