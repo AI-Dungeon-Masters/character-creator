@@ -19,7 +19,7 @@ app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // landing page route for signing in for existing users
-app.get('/',
+app.get('/login',
   (req, res) => {
     console.log(req.query);
     res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html'));
@@ -34,7 +34,7 @@ app.post('/login',
   sessionController.startSession,
   cookieController.setSSIDCookie,
   (req, res) => {
-    res.redirect('/app');
+    res.redirect('/');
   });
 
 // route for new users to sign up
@@ -50,7 +50,7 @@ app.post('/signup',
   sessionController.startSession,
   cookieController.setSSIDCookie,
   (req, res) => {
-    res.redirect('/app');
+    res.redirect('/');
 });
 
 // route for logout (not sure, might not be get)
@@ -58,16 +58,16 @@ app.get('/logout',
   sessionController.endSession,
   cookieController.deleteSSIDCookie,
   (req, res) => {
-    res.redirect('/');
+    res.redirect('/login');
 });
 
 // if user is logged in/signed up (which means they will have a valid session), they will be served the index.html
 // which is entry point for app
-app.get('/app',
+/*app.get('/app',
   sessionController.isLoggedIn,
   (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client', 'index.html'));
-});
+});*/
 
 /**
  * 404 handler - catch all for all invalid route

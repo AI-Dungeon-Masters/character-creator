@@ -12,7 +12,7 @@ userController.verifyUser = async (req, res, next) => {
     return next({
       log: 'Express error handler caught userController.verifyUser error',
       message: { err: err },
-      redirect: '/'
+      redirect: '/login'
     })
   }
 };
