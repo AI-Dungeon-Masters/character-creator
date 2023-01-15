@@ -5,7 +5,7 @@ window.onload = () => {
         callback: (response) => {
             location.href = '/';
             console.log(response);
-        };
+        }
         // We choose to handle the callback in client side, so we include a reference to a function that will handle the response
     });
     // You can skip the next instruction if you don't want to show the "Sign-in" button
