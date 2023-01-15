@@ -29,7 +29,8 @@ databaseController.addUser = async (req, res, next) => {
   } catch (err) {
     return next({
         log: 'Express error handler caught databaseController.addUser error',
-        message: { err: err }
+        message: { err: err },
+        redirect: '/signup'
       })
   }
 };
@@ -47,22 +48,33 @@ databaseController.getUser = async (req, res, next) => {
   
     try {
       const data = await sqlDB.query(query, params);
+      if (data.rows.length === 0) throw "User not found!"
 
       console.log(data.rows[0]);
 
       const databasePassword = data.rows[0].password;
+
       const id = data.rows[0].player_id;
 
       if (databasePassword !== password) throw "Password incorrect!";
+
       else {
         res.locals.id = id;
         return next()
       };
     } catch (err) {
+      if (err === "Password incorrect!") {
+        return next({
+            log: 'Express error handler caught databaseController.getUser error',
+            message: { err: err },
+            redirect: '/'
+          })
+      }
+
       return next({
         log: 'Express error handler caught databaseController.getUser error',
         message: { err: err },
-        redirect: true
+        redirect: '/'
       })
     }
 };
@@ -98,7 +110,7 @@ databaseController.startSession = async (req, res, next) => {
       return next({
         log: 'Express error handler caught databaseController.isLoggedIn error',
         message: { err: err },
-        redirect: true
+        redirect: '/'
       })
     }
 };

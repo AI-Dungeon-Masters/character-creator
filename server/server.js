@@ -19,7 +19,11 @@ app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // landing page route for signing in for existing users
-app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html')));
+app.get('/',
+  (req, res) => {
+    console.log(req.query);
+    res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html'));
+});
 
 app.get('/client/login/oauth.js', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'oauth.js')));
 
@@ -82,7 +86,8 @@ app.use((err, req, res, next) => {
   };
   const errorObj = Object.assign({}, defaultErr, {message: {err: err}});
   console.log(`${errorObj.log}`);
-  if(err.redirect) res.redirect('/');
+  
+  if(err.redirect) res.redirect(err.redirect + '?type=' + err.message.err);
   
   return res.status(errorObj.status).json(errorObj.message);
 });
