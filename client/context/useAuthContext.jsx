@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 const AuthContext = createContext({ loggedInUser: null, logout: null });
 
@@ -11,10 +12,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(Cookies.get('publicKey'));
-    console.log(Cookies.get('token'));
-    //console.log(Cookies.get(publicKey));
-    //fetch();
+    /*let id = null;
+
+    const token = Cookies.get('token');
+    if (token) {
+      const payload = jwt_decode(token);
+      id = payload.id;
+    };*/
+    const token = Cookies.get('token');
+    if (token) {
+      const payload = jwt_decode(token);
+      setLoggedInUser(payload.id);
+    };
   });
 
   return (
