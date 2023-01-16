@@ -19,10 +19,10 @@ app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // landing page route for signing in for existing users
-app.get('/login',
+/*app.get('/login',
   (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html'));
-});
+});*/
 
 app.get('/client/login/oauth.js', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'oauth.js')));
 
@@ -37,10 +37,10 @@ app.post('/login',
   });
 
 // route for new users to sign up
-app.get('/signup', 
+/*app.get('/signup', 
   (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client', 'login', 'signup.html'));
-  });
+  });*/
 
 // route for post for sign up (when user sign up with sign up info)
 app.post('/signup', 
@@ -86,7 +86,7 @@ app.use((err, req, res, next) => {
   const errorObj = Object.assign({}, defaultErr, {message: {err: err}});
   console.log(`${errorObj}`);
   
-  if(err.redirect) res.redirect(err.redirect + '?type=' + err.message.err);
+  if(errorObj.redirect) res.status(errorObj.status).json({ message: errorObj.message, redirect: errorObj.redirect });
   
   return res.status(errorObj.status).json(errorObj.message);
 });
