@@ -13,7 +13,7 @@ import Protected from './components/auth/Protected';
 class App extends Component {
   render() {
     let id = null;
-    
+
     const token = Cookies.get('token');
     if (token) {
       const payload = jwt_decode(token);
@@ -26,9 +26,10 @@ class App extends Component {
           <Routes>
             <Route exact path="/login" element={<Login/>}/>
             <Route exact path="/signup" element={<Signup/>}/>
-            <Route exact path="/" element={<Protected userId={id}>
-                                              <Home/>
-                                            </Protected>}/>
+            <Route exact path="/" element={
+              <Protected userId={id}>
+                <Home/>
+              </Protected>}/>
           </Routes>
         </main>
       </div>
