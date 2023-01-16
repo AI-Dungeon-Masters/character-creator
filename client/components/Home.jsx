@@ -4,9 +4,8 @@ import { useAuth } from '../context/useAuthContext';
 
 const Home = () => {
   const { loggedInUser } = useAuth();
-  console.log('home + ' + loggedInUser);
   return (<div>
-    AHHHH
+    { loggedInUser }
   </div>);
 };
 
