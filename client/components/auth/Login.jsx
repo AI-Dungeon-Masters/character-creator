@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import { useAuth } from '../../context/useAuthContext';
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { setLoggedInUser } = useAuth();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await fetch('/login', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      const id = await data.json();
+      console.log(id);
+      setLoggedInUser(id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
   return (
-    <div>
-      Login
-      <form method="POST" action='/login'>
-          <input name="username" type="text" placeholder="username"/>
-          <input name="password" type="password" placeholder="password"/>
+      <form onSubmit={onSubmit}>
+          <input name="username" type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="username"/>
+          <input name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="password"/>
           <input type='submit' value="login"/>
-      </form>
-      <Link to={'/signup'}>Sign up</Link>
-    </div>);
+          <br/>
+          <Link to={'/signup'}>Sign up</Link>
+      </form>);
 };
 
 export default Login;

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 
-const AuthContext = createContext({ loggedInUser: null, logout: null });
+const AuthContext = createContext({ loggedInUser: null, setLoggedInUser: null, logout: null });
 
 export const AuthProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   return (
-    <AuthContext.Provider value={{ loggedInUser, logout }}>
+    <AuthContext.Provider value={{ loggedInUser, setLoggedInUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

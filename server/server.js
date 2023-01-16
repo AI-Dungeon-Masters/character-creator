@@ -33,9 +33,7 @@ app.post('/login',
   databaseController.getUser,
   sessionController.startSession,
   cookieController.setSSIDCookie,
-  (req, res) => {
-    res.redirect('/');
-  });
+  (req, res) => res.status(200).json(res.locals.id));
 
 // route for new users to sign up
 /*app.get('/signup', 
@@ -75,8 +73,8 @@ app.get('/logout',
  */
 app.use('*', 
   (req,res) => {
-    //res.status(404).send('Not Found');
-    res.redirect('/');
+    res.status(404).send('Not Found');
+    //res.redirect('/');
 });
 
 // default error handler
@@ -87,7 +85,7 @@ app.use((err, req, res, next) => {
     message: { err: 'An error occurred' }
   };
   const errorObj = Object.assign({}, defaultErr, {message: {err: err}});
-  console.log(`${errorObj}`);
+  console.log(errorObj);
   
   if(errorObj.redirect) res.status(errorObj.status).json({ message: errorObj.message, redirect: errorObj.redirect });
   

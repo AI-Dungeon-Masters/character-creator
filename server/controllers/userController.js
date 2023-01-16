@@ -2,6 +2,7 @@ const userController = {};
 
 userController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
+  
   try {
     if ( !username || !password ) throw 'Empty username or password field';
     res.locals.username = username;
