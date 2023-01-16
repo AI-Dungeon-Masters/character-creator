@@ -1,8 +1,11 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-const Protected = ({ userId, children }) => {
-  if (!userId) return <Navigate to="/login" replace />;
+import { useAuth } from '../../context/useAuthContext';
+
+const Protected = ({ children }) => {
+  const { loggedInUser } = useAuth();
+  if (!loggedInUser) return <Navigate to="/login" replace />;
 
   return children;
 }
