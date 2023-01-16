@@ -10,7 +10,7 @@ const Signup = () => {
         <input name="password" type="password" placeholder="password"></input>
         <input type="submit" value="create user"></input>
       </form>
-      <Link to={'/login'}>Sign up</Link>
+      <Link to={'/login'}>Log in</Link>
     </div>);
 };
 
