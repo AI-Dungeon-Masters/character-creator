@@ -1,18 +1,28 @@
 import React, { Component, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Race from './pages/race'
-import Class from './pages/class'
-import Alignment from './pages/alignment'
-import FinalChar from './pages/finalChar'
+
+
+import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 //import './stylesheets/styles.css';
 
-const App = () => {
+import { AuthProvider } from './context/useAuthContext';
+import Home from './components/Home';
+import Login from './components/auth/Login';
+import Signup from './components/auth/Signup';
+import Protected from './components/auth/Protected';
+import Home from './pages/Home';
+import Race from './pages/race';
+import Class from './pages/class';
+import Alignment from './pages/alignment';
+import FinalChar from './pages/finalChar';
 
+const App = () => {
     const [race, setRace] = useState('');
     const [charClass, setCharClass] = useState('');
     const [alignment, setAlignment] = useState('');
+
 
     const changeState = (change, newValue) => {
       change(newValue)
@@ -20,17 +30,26 @@ const App = () => {
 
     const dndNames = ['Regdar', 'Todrdek', 'Alhandra', 'Eberk', 'Athain', 'Arthon', 'Kazak', 'Ragnara', 'Sandharrow', 'Morthos',]
 
+  
+    
+    let id = null;
 
-
-    console.log('App')
+    const token = Cookies.get('token');
+    if (token) {
+      const payload = jwt_decode(token);
+      id = payload.id;
+    };
 
     return (
       <div className="router">
-        {/* <Navbar /> */}
-          <h1>App</h1>
-          <main>
+        <main>
+          <AuthProvider>
             <Routes>
-              <Route 
+              <Route exact path="/login" element={<Login/>}/>
+              <Route exact path="/signup" element={<Signup/>}/>
+              <Route exact path="/" element={
+                <Protected userId={id}>
+                <Route 
                 path='/'
                 element={<Home></Home> }/>
               <Route
@@ -45,8 +64,12 @@ const App = () => {
               <Route
                 path='/finalChar'
                 element={<FinalChar></FinalChar>}/>
+                  <Home/>
+                </Protected>}/>
             </Routes>
-          </main>
+          </AuthProvider>
+        </main>
+
       </div>
     );
 }
