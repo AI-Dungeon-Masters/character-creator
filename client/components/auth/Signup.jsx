@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -9,6 +10,7 @@ const Signup = () => {
         <input name="password" type="password" placeholder="password"></input>
         <input type="submit" value="create user"></input>
       </form>
+      <Link to={'/login'}>Sign up</Link>
     </div>);
 };
 
