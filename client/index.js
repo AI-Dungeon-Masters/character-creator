@@ -7,7 +7,6 @@ import { AuthProvider } from './context/useAuthContext';
 import App from './App';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
-import Protected from './components/auth/Protected';
 
 const container = document.getElementById('app');
 
@@ -19,10 +18,7 @@ root.render(
       <Routes>
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
-        <Route index element={
-          <Protected>
-            <App />
-          </Protected>}/>
+        <Route index element={<App/>}/>
       </Routes>
     </BrowserRouter>
   </AuthProvider>

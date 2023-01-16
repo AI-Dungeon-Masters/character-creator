@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '../../context/useAuthContext';
 
-const Login = () => {
+const Login = ({ setLoggedIn, setAuthModal}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loggedInUser, setLoggedInUser } = useAuth();
+  const { setLoggedInUser } = useAuth();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -17,20 +17,21 @@ const Login = () => {
         body: JSON.stringify({ username, password })
       });
       const id = await data.json();
+      setLoggedIn(id)
       setLoggedInUser(id);
     } catch (err) {
       console.log(err);
     }
   };
   
-  return (
-      <form onSubmit={onSubmit}>
-          <input name="username" type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="username"/>
-          <input name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="password"/>
-          <input type='submit' value="login"/>
-          <br/>
-          <Link to={'/signup'}>Sign up</Link>
-      </form>);
+  return (<div>
+            <form onSubmit={onSubmit}>
+                <input name="username" type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="username"/>
+                <input name="password" type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="password"/>
+                <input type='submit' value="login"/>
+            </form>
+            <button onClick={()=>setAuthModal('signup')}>Sign up</button>
+          </div>);
 };
 
 export default Login;

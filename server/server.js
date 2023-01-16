@@ -3,6 +3,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bodyParser = require("body-parser");
 
 const userController = require('./controllers/userController');
 const cookieController = require('./controllers/cookieController');
@@ -16,6 +17,7 @@ const { json, urlencoded } = require('express');
 
 app.use(json());
 app.use(urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 
 // landing page route for signing in for existing users
@@ -48,9 +50,7 @@ app.post('/signup',
   databaseController.addUser,
   sessionController.startSession,
   cookieController.setSSIDCookie,
-  (req, res) => {
-    res.redirect('/');
-});
+  (req, res) => res.status(200).json(res.locals.id));
 
 // route for logout (not sure, might not be get)
 app.get('/logout', 
@@ -73,8 +73,8 @@ app.get('/logout',
  */
 app.use('*', 
   (req,res) => {
-    res.status(404).send('Not Found');
-    //res.redirect('/');
+    //res.status(404).send('Not Found');
+    res.redirect('/');
 });
 
 // default error handler
