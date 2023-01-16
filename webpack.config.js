@@ -21,9 +21,6 @@ module.exports = {
     compress: true,
     hot: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
-    devMiddleware: {
-      index: false,
-    },
     proxy: {
       '/login': {
         target: 'http://localhost:3000/',

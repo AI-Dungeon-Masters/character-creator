@@ -12,7 +12,7 @@ databaseController.addUser = async (req, res, next) => {
 
   try {
     const newUser = await sqlDB.query(query, params);
-   // res.locals.newUser = newUser
+  //  res.locals.newUser = newUser
     console.log(newUser);
 
     return next();
