@@ -21,7 +21,8 @@ app.use(cookieParser());
 // landing page route for signing in for existing users
 /*app.get('/login',
   (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html'));
+    res.redirect('/');
+    //res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html'));
 });*/
 
 app.get('/client/login/oauth.js', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'oauth.js')));
@@ -39,7 +40,8 @@ app.post('/login',
 // route for new users to sign up
 /*app.get('/signup', 
   (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client', 'login', 'signup.html'));
+    res.redirect('/');
+    //res.sendFile(path.resolve(__dirname, '../client', 'login', 'signup.html'));
   });*/
 
 // route for post for sign up (when user sign up with sign up info)
@@ -73,7 +75,8 @@ app.get('/logout',
  */
 app.use('*', 
   (req,res) => {
-    res.status(404).send('Not Found');
+    //res.status(404).send('Not Found');
+    res.redirect('/');
 });
 
 // default error handler
