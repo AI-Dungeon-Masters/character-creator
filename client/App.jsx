@@ -11,6 +11,7 @@ import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Protected from './components/auth/Protected';
 import Authapp from './components/Authapp.jsx';
+import Book from './components/Book';
 
 const App = () => {
   let id = null;
@@ -28,7 +29,7 @@ const App = () => {
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/" element={
             <Protected userId={id}>
-              <Authapp/>
+              <Book/>
             </Protected>}/>
           </Routes>
     </AuthProvider>
