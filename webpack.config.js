@@ -51,6 +51,7 @@ module.exports = {
         use: [
           {
             // loads files as base64 encoded data url if image file is less than set limit
+            //we removed 'url-loader' and added 'file-loader' to make our image render on home component
             loader: 'url-loader',
             options: {
               // if file is greater than the limit (bytes), file-loader is used as fallback

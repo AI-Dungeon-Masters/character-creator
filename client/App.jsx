@@ -8,27 +8,22 @@ import jwt_decode from 'jwt-decode';
 //import './stylesheets/styles.css';
 
 import { AuthProvider } from './context/useAuthContext';
-import Home from './components/Home';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Protected from './components/auth/Protected';
 import Home from './pages/Home';
-import Race from './pages/race';
-import Class from './pages/class';
-import Alignment from './pages/alignment';
+
+
+
 import FinalChar from './pages/finalChar';
-
+import Authapp from './components/Authapp.jsx';
 const App = () => {
-    const [race, setRace] = useState('');
-    const [charClass, setCharClass] = useState('');
-    const [alignment, setAlignment] = useState('');
-
-
+  
     const changeState = (change, newValue) => {
       change(newValue)
     }
 
-    const dndNames = ['Regdar', 'Todrdek', 'Alhandra', 'Eberk', 'Athain', 'Arthon', 'Kazak', 'Ragnara', 'Sandharrow', 'Morthos',]
+   
 
   
     
@@ -48,25 +43,10 @@ const App = () => {
               <Route exact path="/login" element={<Login/>}/>
               <Route exact path="/signup" element={<Signup/>}/>
               <Route exact path="/" element={
-                <Protected userId={id}>
-                <Route 
-                path='/'
-                element={<Home></Home> }/>
-              <Route
-                path='/race'
-                element={<Race race={race} setRace={setRace} changeState={changeState}></Race>}/>
-              <Route
-                path='/class'
-                element={<Class></Class>}/>
-              <Route
-                path='/alignment'
-                element={<Alignment></Alignment>}/>
-              <Route
-                path='/finalChar'
-                element={<FinalChar></FinalChar>}/>
-                  <Home/>
-                </Protected>}/>
-            </Routes>
+                  <Protected userId={id}>
+                    <Authapp/>
+                  </Protected>}/>
+                </Routes>
           </AuthProvider>
         </main>
 
