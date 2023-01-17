@@ -25,7 +25,7 @@ const Authapp = () => {
       case "alignment":
         return (<Alignment setCurrentComponent={setCurrentComponent} setAlignment={setAlignment}/>);
       case "finalChar":
-        return (<FinalChar/>);
+        return (<FinalChar race={race} charClass={charClass} alignment={alignment} />);
     };
   };
 
