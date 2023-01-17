@@ -30,6 +30,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         secure: false,
       },
+      '/AI/text': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      }
     }
   },
   module: {

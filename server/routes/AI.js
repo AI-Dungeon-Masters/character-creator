@@ -1,11 +1,14 @@
 const express = require('express');
 const path = require('path');
 
+const openAIController = require('../controllers/openAIController');
+
 const router = express.Router();
 
-console.log('routes');
-router.get('/', (req, res, next) => {
-    console.log('ahh');
+router.get('/text',
+  openAIController.generateText,
+  (req, res, next) => {
+    return next();
 });
 // ADD STARTER DATA REQUEST ROUTE HANDLER HERE
 //router.get('/text', (req, res) => {
