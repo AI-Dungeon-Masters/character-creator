@@ -14,7 +14,7 @@ import Authapp from './components/Authapp.jsx';
 
 const App = () => {
   let id = null;
-
+  // very bad IDEA! NO! NOOO! NOOOOOOOOOO!
   const token = Cookies.get('token');
   if (token) {
     const payload = jwt_decode(token);
