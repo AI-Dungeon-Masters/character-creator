@@ -85,10 +85,7 @@ app.get('/logout',
     res.sendFile(path.resolve(__dirname, '../client', 'index.html'));
 });*/
 
-<<<<<<< HEAD
 app.use('/AI', AI, (req, res) => res.status(200).json(res.locals.text));
-=======
->>>>>>> maindisplay
 
 /**
  * 404 handler - catch all for all invalid route
