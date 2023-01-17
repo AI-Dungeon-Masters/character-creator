@@ -21,10 +21,6 @@ app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../client', 'index.html')))
-<<<<<<< HEAD
-
-=======
->>>>>>> maindisplay
 /*
 app.get('/',
   sessionController.isLoggedIn,
