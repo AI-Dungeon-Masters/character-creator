@@ -21,11 +21,12 @@ app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../client', 'index.html')))
 
+/*
 app.get('/',
   sessionController.isLoggedIn,
   (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client', 'index.html'));
-});
+});*/
 
 // landing page route for signing in for existing users
 /*app.get('/login',
