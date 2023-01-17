@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 
 
 
-const Race = (props) => {
+const Race = ({setRace, setCurrentComponent}) => {
+
+ 
 
     let navigate = useNavigate();
 
-    const changeState = props.changeState;
-    const setRace = props.setRace;
-    const race = props.race;
+
 
     const dndRace = [
         {Dwarf: 'You are between 4-5 ft, can live around 350 years, can see in the dark, are proficient with axes, and Constitution is increased by 2'},
@@ -21,32 +21,25 @@ const Race = (props) => {
     ];
     
 
-    console.log(race)
-    const enter = () => {
-        console.log(race)
-        navigate('/class');
-    }
     return (
         <div>
-            <h1>Choose your Race</h1>
+            <h1>Choose Your Race</h1>
 
-            <div className='race characteristic-grid'>
+            <div className='race-grid'>
                {
                     dndRace.map((obj, index) => (
-
-                        <div>
+                        <div> 
                             <div className='name-check'>
-                                <input type='radio' name='race' onChange={() => changeState(setRace, Object.keys(obj)[0])} />
+                                <input type='radio' name='race' onChange={() => setRace( Object.keys(obj)[0])} />
                                 <h2 className='name'>{Object.keys(obj)[0]}</h2>
                             </div>
                             <p className='description'>{Object.values(obj)[0]}</p>
                         </div>
                     ))
-               }
-               
+               }                         
             </div>
-
-            <button className="randomChar" onClick={enter}>Next</button>
+            <button className="randomChar" onClick={()=>{setCurrentComponent('home')}} >Home</button>
+            <button className="randomChar" onClick={()=>{setCurrentComponent('charclass')}} >Next</button>
 
         </div>
     )

@@ -21,7 +21,10 @@ app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../client', 'index.html')))
+<<<<<<< HEAD
 
+=======
+>>>>>>> maindisplay
 /*
 app.get('/',
   sessionController.isLoggedIn,
@@ -35,7 +38,6 @@ app.get('/',
     res.redirect('/');
     //res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html'));
 });*/
-
 
 app.get('/client/login/oauth.js', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'oauth.js')));
 
@@ -83,15 +85,18 @@ app.get('/logout',
     res.sendFile(path.resolve(__dirname, '../client', 'index.html'));
 });*/
 
+<<<<<<< HEAD
 app.use('/AI', AI, (req, res) => res.status(200).json(res.locals.text));
+=======
+>>>>>>> maindisplay
 
 /**
  * 404 handler - catch all for all invalid route
  */
 app.use('*', 
   (req,res) => {
-    //res.status(404).send('Not Found');
-    res.redirect('/');
+    res.status(404).send('Not Found');
+    //res.redirect('/');
 });
 
 // default error handler
