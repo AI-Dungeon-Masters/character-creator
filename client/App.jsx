@@ -63,9 +63,9 @@ const App = () => {
             </Routes>
           </AuthProvider>
         </main>
-
       </div>
     );
-}
+    }
+  }
 
 export default App;
