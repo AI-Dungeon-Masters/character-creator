@@ -20,7 +20,7 @@ const FinalChar = ({ race, charClass, alignment }) => {
       const imageUrlData = await fetch('/AI/image', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: `${alignment} ${race} ${charClass} tarot card da vinci` })
+        body: JSON.stringify({ prompt: `${alignment} ${race} ${charClass} tarot card Frank Frazetta` })
       });
 
       const imageUrl = await imageUrlData.json();
