@@ -16,8 +16,6 @@ root.render(
   <AuthProvider>
     <BrowserRouter>
       <Routes>
-        <Route exact path="/login" element={<Login/>}/>
-        <Route exact path="/signup" element={<Signup/>}/>
         <Route index element={<App/>}/>
       </Routes>
     </BrowserRouter>
