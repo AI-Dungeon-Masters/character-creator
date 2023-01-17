@@ -38,8 +38,30 @@ openAIController.generateText = async (req, res, next) => {
       message: { err: err }
     });
   }
-  
-  return next();
 }
+
+openAIController.generateImage = async (req, res, next) => {
+  const { prompt } = req.body;
+
+  console.log(prompt);
+
+  try {
+    const response = await openai.createImage({
+      prompt: `${prompt}`,
+      n: 1,
+      size: "512x512",
+    });
+
+    res.locals.imageUrl = response.data.data[0].url;
+    
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Express error handler caught openAIController.generateImage error',
+      status: 400,
+      message: { err: err }
+    });
+  }
+};
 
 module.exports = openAIController;

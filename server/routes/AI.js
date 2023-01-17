@@ -8,21 +8,9 @@ const router = express.Router();
 router.post('/text',
   openAIController.generateText,
   (req, res) => res.status(200).json(res.locals.text));
-// ADD STARTER DATA REQUEST ROUTE HANDLER HERE
-//router.get('/text', (req, res) => {
-   // console.log('osivjasdj');
-  //  const characters = res.locals.characters // already in json
-   // return res.status(200).send({text:'ai says hi'});
-    //res.status(200).json(characters);
-    //res.send()
-    
-//});
 
-// ADD GET MORE CHARACTERS ROUTE HANDLER HERE
-/*router.get('/more-characters', swapiController.getMoreCharacters, characterController.populateCharacterPhotos, (req, res) => {
-    return res.status(200).json({
-        "moreCharacters": res.locals.moreCharacters,
-    });
-});*/
+router.post('/image',
+  openAIController.generateImage,
+  (req, res) => res.status(200).json(res.locals.imageUrl));
 
 module.exports = router;
