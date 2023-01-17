@@ -11,21 +11,10 @@ import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Protected from './components/auth/Protected';
 import Home from './pages/Home';
-
-
-
 import FinalChar from './pages/finalChar';
 import Authapp from './components/Authapp.jsx';
+
 const App = () => {
-  
-    const changeState = (change, newValue) => {
-      change(newValue)
-    }
-
-   
-
-  
-    
     let id = null;
 
     const token = Cookies.get('token');
@@ -48,7 +37,6 @@ const App = () => {
                 </Routes>
           </AuthProvider>
         </main>
-
       </div>
     );
 } 
