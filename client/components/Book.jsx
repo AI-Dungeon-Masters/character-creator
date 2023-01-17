@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useCallback, useState }  from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import Page from './Page';
 import Home from '../pages/Home';
@@ -9,14 +9,24 @@ import Alignment from '../pages/Alignment';
 import FinalChar from '../pages/FinalChar';
 
 const Book = (props) => {
+    const [race, setRace] = useState('');
+    const [charClass, setCharClass] = useState('');
+    const [alignment, setAlignment] = useState('');
+    const [currentComponent, setCurrentComponent] = useState('home');
+
+    const onFlip = useCallback(e => {
+
+    });
+
     return (
-        <HTMLFlipBook width={300} height={500}>
-            <Page number="1"><Home/></Page>
-            <Page number="2"><Home2/></Page>
-            <Page number="3"><Race/></Page>
-            <Page number="4"><CharClass/></Page>
-            <Page number="5"><Alignment/></Page>
-            <Page number="6"><FinalChar/></Page>
+        <HTMLFlipBook width={700} height={1000} size="stretch" onFlip={onFlip} >
+            <Page><Home/></Page>
+            <Page><Home2/></Page>
+            <Page><Race setRace={setRace}/></Page>
+            <Page><CharClass setCharClass={setCharClass}/></Page>
+            <Page><Alignment setAlignment={setAlignment}/></Page>
+            <Page></Page>
+            <Page><FinalChar race={race} charClass={charClass} alignment={alignment} /></Page>
         </HTMLFlipBook>
     );
 };

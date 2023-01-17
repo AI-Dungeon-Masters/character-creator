@@ -9,7 +9,6 @@ import styling from '../index.css'
 const Home = ({ setCurrentComponent }) => {
     return (
         <div>
-            <h1>Welcome Home</h1>
             {/* <RandomChar/> */}
             <img className='opening-img' src={intro}/>
         </div>
