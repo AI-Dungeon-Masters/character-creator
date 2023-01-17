@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CharClass = ({setCharClass, setCurrentComponent}) => { d
+const CharClass = ({setCharClass, setCurrentComponent}) => {
   const dndClass = [
       {Fighter: 'An expert in many fighting styles, proficient with all weapons and armor, d10 hit die, and focus on Strength and Dexterity'},
       {Bard: 'An inspiring magician who uses song and charisma to get into and out of trouble, can use light armor and simple weapons, d8 hit die, and focus on Charisma'},
