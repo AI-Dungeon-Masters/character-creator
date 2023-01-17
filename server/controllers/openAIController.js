@@ -11,17 +11,13 @@ const openai = new OpenAIApi(configuration);
 
 openAIController.generateText = async (req, res, next) => {
   try {
-    // Call OpenAI API
-    if (!req.body.promp) throw 'Missing required field "prompt" in request body';
     const { prompt } = req.body;
-    console.log(prompt);
+    // Call OpenAI API
+    if (!prompt) throw 'Missing required field "prompt" in request body';
 
     const response = await openai.createCompletion({
       model: 'text-davinci-003',
-      prompt: `
-        I want you to reply to all my questions in markdown format. 
-        Q: ${prompt}?.
-        A: `,
+      prompt: prompt,
       temperature: 0.5,
       max_tokens: 500,
       top_p: 0.5,
@@ -29,12 +25,10 @@ openAIController.generateText = async (req, res, next) => {
       presence_penalty: 0.2,
     });
 
-    console.log(response.data.choices[0].text)
-    // Return response from OpenAI API
-    /*res.status(200).send({
-      bot: response.data.choices[0].text,
-      limit: res.body.limit
-    });*/
+    res.locals.text = response.data.choices[0].text;
+
+    return next();
+
   } catch (err) {
     return next({
       log: 'Express error handler caught openAIController.generateText error',
@@ -43,7 +37,6 @@ openAIController.generateText = async (req, res, next) => {
     });
   }
   
-  return next();
 }
 
 module.exports = openAIController;

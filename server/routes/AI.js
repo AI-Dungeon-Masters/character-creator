@@ -5,7 +5,7 @@ const openAIController = require('../controllers/openAIController');
 
 const router = express.Router();
 
-router.get('/text',
+router.post('/text',
   openAIController.generateText,
   (req, res, next) => {
     return next();

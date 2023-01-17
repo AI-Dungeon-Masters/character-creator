@@ -3,7 +3,6 @@ require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const { Configuration, OpenAIApi } = require('openai');
 
 const userController = require('./controllers/userController');
 const cookieController = require('./controllers/cookieController');
@@ -23,10 +22,6 @@ app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../client', 'index.html')))
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
 /*
 app.get('/',
   sessionController.isLoggedIn,
@@ -88,7 +83,7 @@ app.get('/logout',
     res.sendFile(path.resolve(__dirname, '../client', 'index.html'));
 });*/
 
-app.use('/AI', AI, (req, res) => res.status(200).json({AI: 'ooooo'}));
+app.use('/AI', AI, (req, res) => res.status(200).json(res.locals.text));
 
 /**
  * 404 handler - catch all for all invalid route
