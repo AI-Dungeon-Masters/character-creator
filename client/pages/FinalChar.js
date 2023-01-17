@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import Speech from 'react-speech';
 
 const FinalChar = ({ race, charClass, alignment }) => {
-  const [story, setStory] = useState("Loading...");
+  const [story, setStory] = useState(null);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -11,7 +12,7 @@ const FinalChar = ({ race, charClass, alignment }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: `Tell me an exciting story about a ${alignment} ${race} ${charClass}
                                         in 200 words.` })
-      });
+      }, []);
 
       const text = await data.json();
       setStory(text);
@@ -21,13 +22,13 @@ const FinalChar = ({ race, charClass, alignment }) => {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: `${alignment} ${race} ${charClass} tarot card Frank Frazetta` })
-      });
+      }, []);
 
       const imageUrl = await imageUrlData.json();
       setImage(imageUrl);
     }
 
-    if(story === "Loading...") {
+    if(!story) {
       fetchData();
     };
 
@@ -37,6 +38,13 @@ const FinalChar = ({ race, charClass, alignment }) => {
     
   });
 
+  const storySpeech = () => {
+    if(story)
+    return <Speech text={story} 
+                    textAsButton={true} 
+                    voice="Google UK English Male"/>;
+    else return <div>Loading...</div>;
+  };
     
   return (
     <div>
@@ -48,7 +56,7 @@ const FinalChar = ({ race, charClass, alignment }) => {
       {alignment}
       <br/>
       <br/>
-      {story}
+      {storySpeech()}
       <br/>
       <br/>
       <img src={image} width="512" height="512"/>
