@@ -18,12 +18,22 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(cookieParser());
 
+
+app.use(express.static(path.resolve(__dirname, '../client', 'index.html')))
+
+app.get('/',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'index.html'));
+});
+
 // landing page route for signing in for existing users
 /*app.get('/login',
   (req, res) => {
     res.redirect('/');
     //res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'login.html'));
 });*/
+
 
 app.get('/client/login/oauth.js', (req, res) => res.status(200).sendFile(path.join(__dirname, '../client', 'login', 'oauth.js')));
 
@@ -64,11 +74,13 @@ app.get('/logout',
 
 // if user is logged in/signed up (which means they will have a valid session), they will be served the index.html
 // which is entry point for app
+
 /*app.get('/app',
   sessionController.isLoggedIn,
   (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client', 'index.html'));
 });*/
+
 
 /**
  * 404 handler - catch all for all invalid route
