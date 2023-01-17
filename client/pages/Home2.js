@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 // import FinalChar from './finalChar';
 // import RandomChar from './randomChar';
-import intro from '../img/image_part_001.png'
+import intro from '../img/image_part_002.png'
 
 import styling from '../index.css'
 
