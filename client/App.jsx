@@ -7,7 +7,6 @@ import jwt_decode from 'jwt-decode';
 //import './stylesheets/styles.css';
 
 import { AuthProvider } from './context/useAuthContext';
-import Home from './components/Home';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Protected from './components/auth/Protected';
@@ -37,7 +36,7 @@ const App = () => {
     if (token) {
       const payload = jwt_decode(token);
       id = payload.id;
-
+    }
     return (
       <div className="router">
         <main>
@@ -65,7 +64,6 @@ const App = () => {
         </main>
       </div>
     );
-    }
-  }
+} 
 
 export default App;
