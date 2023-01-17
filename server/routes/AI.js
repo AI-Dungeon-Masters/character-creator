@@ -7,9 +7,7 @@ const router = express.Router();
 
 router.post('/text',
   openAIController.generateText,
-  (req, res, next) => {
-    return next();
-});
+  (req, res) => res.status(200).json(res.locals.text));
 // ADD STARTER DATA REQUEST ROUTE HANDLER HERE
 //router.get('/text', (req, res) => {
    // console.log('osivjasdj');
